@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bargdoktor</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--tile:#F3F4F1;--ink:#111A15;--mute:#7A857E;--line:#E4E7E2;--acc:#1E7A4F;--bad:#C2410C;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1411;--tile:#18211C;--ink:#EEF3EF;--mute:#8C9A91;--line:#27332C;--acc:#5CCB8F;--bad:#FF9466}}
+:root[data-theme="dark"]{--bg:#0E1411;--tile:#18211C;--ink:#EEF3EF;--mute:#8C9A91;--line:#27332C;--acc:#5CCB8F;--bad:#FF9466}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.55 'Plus Jakarta Sans',system-ui,sans-serif;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:92px}
+h1{font-size:34px;font-weight:500;letter-spacing:-.03em;line-height:1.08}
+h2{font-size:13px;font-weight:700;color:var(--mute);margin:26px 0 10px}
+h3{font-size:16px;font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px 0}
+.logo{font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.logo i{width:10px;height:10px;border-radius:50% 50% 50% 0;background:var(--acc)}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--tile);border:1px solid var(--line);border-radius:14px;padding:9px 12px;outline:0}
+select{padding:6px 10px;font-size:13px}
+input,textarea{width:100%}
+.scr{display:none;padding:22px 20px}.scr.on{display:block}
+.sub{color:var(--mute);font-size:13px}
+i.lat{font-style:italic;color:var(--mute);font-size:13px}
+.btn{border:0;border-radius:14px;padding:14px 18px;font:700 15px 'Plus Jakarta Sans',system-ui,sans-serif;background:var(--ink);color:var(--bg);cursor:pointer;width:100%;display:block;text-align:center}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.cam{aspect-ratio:1/1;background:var(--tile);border-radius:28px;margin:20px 0 12px;position:relative;overflow:hidden;display:grid;place-items:center;color:var(--mute);text-align:center;font-size:13px}
+.cam video,.cam img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cam b{position:absolute;width:26px;height:26px;border:2px solid #fff;mix-blend-mode:difference}
+.c1{top:18px;left:18px;border-right:0!important;border-bottom:0!important}.c2{top:18px;right:18px;border-left:0!important;border-bottom:0!important}
+.c3{bottom:18px;left:18px;border-right:0!important;border-top:0!important}.c4{bottom:18px;right:18px;border-left:0!important;border-top:0!important}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.res{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.res p{margin-top:6px}.res b{display:block;margin-top:14px;color:var(--mute);font-size:12px}
+.pill{display:inline-block;border-radius:99px;padding:2px 11px;font-size:12px;font-weight:700;background:var(--tile);margin-top:6px}
+.pill.bad{background:var(--bad);color:#fff}.pill.ok{background:var(--acc);color:var(--bg)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--tile);border-radius:22px;padding:14px;cursor:pointer;border:0;text-align:left;color:var(--ink);font:inherit}
+.tile svg{width:100%;height:92px;display:block;margin-bottom:8px}
+.tile h3{font-size:14px}
+.chips{display:flex;gap:6px;overflow-x:auto;margin:12px 0}
+.chip{flex:none;border:1px solid var(--line);background:none;color:var(--ink);border-radius:99px;padding:6px 14px;font:500 13px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rare{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rare svg{width:74px;height:74px;background:var(--tile);border-radius:20px;padding:8px}
+.scale{display:flex;gap:3px;margin:8px 0 4px}.scale i{flex:1;height:4px;border-radius:4px;background:var(--line)}.scale i.on{background:var(--bad)}
+.set{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.tog{width:46px;height:28px;border-radius:28px;background:var(--line);border:0;position:relative;flex:none;cursor:pointer}
+.tog::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:var(--bg);transition:.2s}
+.tog.on{background:var(--acc)}.tog.on::after{left:21px}
+.ava{width:84px;height:84px;border-radius:50%;background:var(--tile);overflow:hidden;display:grid;place-items:center;color:var(--mute);cursor:pointer;flex:none;border:1px solid var(--line)}
+.ava img{width:100%;height:100%;object-fit:cover}
+.gi{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.gi .th{width:56px;height:56px;border-radius:16px;background:var(--tile);overflow:hidden;display:grid;place-items:center}.gi .th img{width:100%;height:100%;object-fit:cover}.gi .th svg{width:40px;height:40px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--bg);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{background:none;border:0;color:var(--mute);font:500 11px 'Plus Jakarta Sans',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 10px;cursor:pointer}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--ink)}nav button.on svg{stroke:var(--acc)}
+#modal{position:fixed;inset:0;background:var(--bg);z-index:20;display:none;overflow:auto;padding:calc(18px + env(safe-area-inset-top,0px)) 20px 40px;max-width:520px;margin:0 auto}
+#modal .big{background:var(--tile);border-radius:32px;padding:30px;margin:14px 0}#modal .big svg{width:100%;height:190px}
+.x{background:none;border:0;color:var(--ink);font:500 15px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;padding:6px 0}
+[dir=rtl]{text-align:right}
+
+:root{--bg:#F5F2E8;--tile:#E9E5D4;--ink:#1B2A17;--mute:#7C8070;--line:#DDD8C4;--acc:#24491F;--card:#FBF9F1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121A0F;--tile:#1C2818;--ink:#EFF2E6;--mute:#93A087;--line:#2B3926;--acc:#7BC96F;--card:#1A2416}}
+:root[data-theme="dark"]{--bg:#121A0F;--tile:#1C2818;--ink:#EFF2E6;--mute:#93A087;--line:#2B3926;--acc:#7BC96F;--card:#1A2416}
+h1{font-weight:800;letter-spacing:-.035em}
+.btn{background:var(--acc);color:var(--bg);border-radius:999px}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+input,select{background:var(--card);border-radius:999px;padding:12px 16px}textarea{background:var(--card);border-radius:20px}
+.logo i{width:13px;height:13px}
+.tile{background:var(--card);border-radius:28px;padding:10px 10px 14px}.tile svg{height:112px;background:var(--tile);border-radius:20px;padding:10px;margin-bottom:10px}.tile h3,.tile i{padding-left:4px}
+.chip{background:var(--card)}.chip.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+.hero{position:relative;min-height:190px;overflow:hidden}.hero h1{font-size:34px;max-width:230px;position:relative}.hero p{max-width:200px;margin-top:10px;position:relative}.hero #heroSvg svg{position:absolute;right:-30px;top:-10px;width:200px;height:200px;color:var(--acc)}
+.cam{aspect-ratio:3/4;border-radius:32px;background:#16241A;color:#cdd8c6}.cam b{mix-blend-mode:normal;width:34px;height:34px;border-radius:6px}
+.res{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:18px;margin-top:14px}
+nav button.mid{background:var(--acc);color:var(--bg);width:58px;height:58px;border-radius:50%;justify-content:center;margin-top:-26px;border:4px solid var(--bg);padding:0}nav button.mid svg{stroke:var(--bg)!important}nav button.mid span{display:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--tile);border-radius:99px;padding:4px;margin:16px 0 6px}.seg button{border:0;background:none;border-radius:99px;padding:10px;font:700 14px 'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);cursor:pointer}.seg button.on{background:var(--acc);color:var(--bg)}
+.task{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}.task .ck{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--mute);background:none;color:var(--bg);font-size:13px;pointer-events:none}.task.done .ck{background:var(--acc);border-color:var(--acc)}.task.done b{text-decoration:line-through;opacity:.5}
+.attrs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}.attrs div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 6px;text-align:center;font-size:12px;font-weight:700}.attrs span{display:block;font-size:18px}
+
+:root{--bg:#FFFFFF;--tile:#F6F4F0;--ink:#1A1A1A;--mute:#8B8B8B;--line:#ECEAE6;--acc:#F26A0F;--onacc:#fff;--card:#FFFFFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--tile:#1D1D1D;--ink:#F2F2F2;--mute:#9A9A9A;--line:#2A2A2A;--acc:#FF8A3D;--onacc:#1A1A1A;--card:#121212}}
+:root[data-theme="dark"]{--bg:#121212;--tile:#1D1D1D;--ink:#F2F2F2;--mute:#9A9A9A;--line:#2A2A2A;--acc:#FF8A3D;--onacc:#1A1A1A;--card:#121212}
+body{background:var(--bg)}
+.top,.scr{position:relative;z-index:1}nav{z-index:5}
+.btn{background:var(--acc);color:var(--onacc)}
+.btn.alt{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+.logo i{background:var(--acc)}
+.chip{background:var(--bg)}.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tile{background:var(--bg);border:1px solid var(--line);box-shadow:none}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.task.done .ck,.tog.on{background:var(--acc);border-color:var(--acc)}.task .ck{color:var(--onacc)}
+.pill.ok{background:var(--tile);color:var(--ink)}
+nav button.mid{background:var(--acc);color:var(--onacc)}nav button.mid svg{stroke:var(--onacc)!important}
+nav button.on svg{stroke:var(--acc)}
+.res{background:var(--tile);border:0}
+.attrs div{background:var(--tile);border:0}
+.hero #heroSvg svg{color:var(--acc);animation:grow 1.4s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 100%}
+@keyframes grow{from{transform:scale(.3) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.leaves{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.leaf{position:absolute;top:-50px;opacity:.5;animation:fall linear infinite}
+@keyframes fall{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(36px,28vh) rotate(100deg)}50%{transform:translate(-24px,56vh) rotate(210deg)}75%{transform:translate(30px,84vh) rotate(300deg)}100%{transform:translate(-8px,118vh) rotate(380deg)}}
+@media (prefers-reduced-motion:reduce){.leaves{display:none}.hero #heroSvg svg{animation:none}}
+</style>
+</head>
+<body>
+<div class="leaves" id="leaves" aria-hidden="true"></div>
+<div class="top"><div class="logo"><i></i>bargdoktor</div><select id="lang" aria-label="Language"><option value="uz">Oʻzbekcha</option><option value="ru">Русский</option><option value="en">English</option><option value="tr">Türkçe</option><option value="zh">中文</option></select></div>
+
+<section class="scr" id="s-home">
+<h1 id="t-h"></h1>
+<div class="cam" id="cam"><b class="c1"></b><b class="c2"></b><b class="c3"></b><b class="c4"></b><span id="camTxt"></span></div>
+<div class="pair"><button class="btn" id="camBtn"></button><label class="btn alt" id="upl" style="cursor:pointer"></label></div>
+<button class="btn alt" id="demo" style="margin-top:10px"></button>
+<input type="file" id="file" accept="image/*" capture="environment" hidden><input type="file" id="file2" accept="image/*" hidden>
+<div class="res" id="res" style="display:none"></div>
+</section>
+
+<section class="scr on" id="s-lib">
+<div class="hero"><div id="heroSvg"></div><h1 id="t-lib"></h1><p class="sub" id="t-ls"></p></div>
+<input id="q" style="margin-top:6px">
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section class="scr" id="s-garden">
+<h1 id="t-garden"></h1>
+<div class="seg" id="seg"></div><div id="tasks"></div>
+<h2 id="t-my"></h2><div id="gl"></div>
+<h2 id="t-notes"></h2>
+<textarea id="note" rows="2"></textarea>
+<button class="btn" id="addNote" style="margin-top:8px"></button>
+<div id="nl"></div>
+</section>
+
+<section class="scr" id="s-rare">
+<h1 id="t-rare"></h1>
+<p class="sub" id="t-rareSub" style="margin-top:8px"></p>
+<div id="rl"></div>
+</section>
+
+<section class="scr" id="s-profile">
+<div style="display:flex;gap:16px;align-items:center"><label class="ava" id="ava"></label><input type="file" id="pf" accept="image/*" hidden><div style="flex:1"><input id="pname"><p class="sub" id="t-photo" style="margin-top:6px"></p></div></div>
+<h2 id="t-set"></h2>
+<div class="set"><div><b id="t-loc"></b><p class="sub" id="locTxt"></p></div><button class="tog" id="locTog"></button></div>
+<div class="set"><b id="t-dark"></b><button class="tog" id="darkTog"></button></div>
+</section>
+
+<div id="modal"></div>
+
+<nav>
+<button data-s="lib" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></svg><span id="n-lib"></span></button>
+<button data-s="garden" class=""><svg viewBox="0 0 24 24"><path d="M12 21V10M12 14c-5 0-7-3-7-7 5 0 7 3 7 7zM12 12c0-4 2-6 7-6 0 4-2 6-7 6z"/></svg><span id="n-garden"></span></button>
+<button data-s="home" class=" mid"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span id="n-home"></span></button>
+<button data-s="rare" class=""><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 9V3M12 15v6M9 12H3M15 12h6"/></svg><span id="n-rare"></span></button>
+<button data-s="profile" class=""><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg><span id="n-profile"></span></button>
+</nav>
+
+<script>
+const PL=__PLANTS__, RR=__RARE__;
+const $=id=>document.getElementById(id);
+const T={
+uz:{h:'Oʻsimlikni suratga oling',tap:'Kamerani yoqing yoki rasm yuklang',cam:'Kamera',shot:'Suratga olish',upl:'Rasm yuklash',busy:'Tahlil qilinmoqda…',lib:'Kutubxona',search:'Oʻsimlik qidirish',garden:'Bogʻim',rare:'Nodir',profile:'Profil',home:'Skaner',save:'Bogʻga qoʻshish',saved:'Qoʻshildi ✓',empty:'Hali oʻsimlik yoʻq. Skanerlang yoki kutubxonadan tanlang.',notes:'Eslatmalar',add:'Qoʻshish',nph:'Eslatma yozing…',set:'Sozlamalar',loc:'Joylashuv',on:'Yoqilgan',off:'Oʻchiq',dark:'Qorongʻi rejim',name:'Ismingiz',photo:'Rasmni oʻzgartirish uchun bosing',ok:'Sogʻlom',sick:'Kasallik',treat:'Davolash',water:'Sugʻorish',care:'Parvarish boʻyicha maslahat',all:'Hammasi',close:'Yopish',err:'Xatolik. Qayta urinib koʻring.',camoff:'Kamera ruxsat etilmadi. «Rasm yuklash»dan foydalaning.',rs:'IUCN boʻyicha xavf ostidagi turlar. Ularning soni yildan-yilga kamaymoqda.',wild:'Tabiatda taxminan',CR:'Tanqidiy xavf',EN:'Xavf ostida',VU:'Zaif',v:'Sabzavot',f:'Meva',fl:'Gul',t:'Daraxt',h:'Dorivor',i:'Xona',fd:'Dala'},
+ru:{h:'Сфотографируйте растение',tap:'Включите камеру или загрузите фото',cam:'Камера',shot:'Снять',upl:'Загрузить фото',busy:'Анализирую…',lib:'Библиотека',search:'Поиск растения',garden:'Мой сад',rare:'Редкие',profile:'Профиль',home:'Скан',save:'В мой сад',saved:'Добавлено ✓',empty:'Пока пусто. Отсканируйте растение или выберите в библиотеке.',notes:'Заметки',add:'Добавить',nph:'Напишите заметку…',set:'Настройки',loc:'Геолокация',on:'Включена',off:'Выключена',dark:'Тёмная тема',name:'Ваше имя',photo:'Нажмите, чтобы сменить фото',ok:'Здорово',sick:'Болезнь',treat:'Лечение',water:'Полив',care:'Совет по уходу',all:'Все',close:'Закрыть',err:'Ошибка. Попробуйте ещё раз.',camoff:'Нет доступа к камере. Нажмите «Загрузить фото».',rs:'Виды под угрозой по данным IUCN. Их численность сокращается.',wild:'В природе примерно',CR:'На грани исчезновения',EN:'Под угрозой',VU:'Уязвимый',v:'Овощи',f:'Фрукты',fl:'Цветы',t:'Деревья',h:'Травы',i:'Комнатные',fd:'Поле'},
+en:{h:'Photograph a plant',tap:'Turn on the camera or upload a photo',cam:'Camera',shot:'Capture',upl:'Upload photo',busy:'Analyzing…',lib:'Library',search:'Search plants',garden:'My garden',rare:'Rare',profile:'Profile',home:'Scan',save:'Add to garden',saved:'Added ✓',empty:'Nothing yet. Scan a plant or pick one from the library.',notes:'Notes',add:'Add',nph:'Write a note…',set:'Settings',loc:'Location',on:'On',off:'Off',dark:'Dark mode',name:'Your name',photo:'Tap to change photo',ok:'Healthy',sick:'Problem',treat:'Treatment',water:'Watering',care:'Care guide',all:'All',close:'Close',err:'Something went wrong. Try again.',camoff:'Camera access denied. Use “Upload photo”.',rs:'Species at risk per IUCN. Their numbers keep falling.',wild:'In the wild about',CR:'Critically endangered',EN:'Endangered',VU:'Vulnerable',v:'Vegetables',f:'Fruit',fl:'Flowers',t:'Trees',h:'Herbs',i:'Indoor',fd:'Field'},
+tr:{h:'Bitkinin fotoğrafını çekin',tap:'Kamerayı açın veya fotoğraf yükleyin',cam:'Kamera',shot:'Çek',upl:'Fotoğraf yükle',busy:'Analiz ediliyor…',lib:'Kütüphane',search:'Bitki ara',garden:'Bahçem',rare:'Nadir',profile:'Profil',home:'Tara',save:'Bahçeme ekle',saved:'Eklendi ✓',empty:'Henüz bitki yok. Tarayın veya kütüphaneden seçin.',notes:'Notlar',add:'Ekle',nph:'Not yazın…',set:'Ayarlar',loc:'Konum',on:'Açık',off:'Kapalı',dark:'Karanlık mod',name:'Adınız',photo:'Fotoğrafı değiştirmek için dokunun',ok:'Sağlıklı',sick:'Sorun',treat:'Tedavi',water:'Sulama',care:'Bakım rehberi',all:'Hepsi',close:'Kapat',err:'Hata. Tekrar deneyin.',camoff:'Kamera izni yok. “Fotoğraf yükle”yi kullanın.',rs:'IUCN’ye göre risk altındaki türler. Sayıları azalıyor.',wild:'Doğada yaklaşık',CR:'Kritik tehlikede',EN:'Tehlikede',VU:'Hassas',v:'Sebze',f:'Meyve',fl:'Çiçek',t:'Ağaç',h:'Otlar',i:'Oda bitkisi',fd:'Tarla'},
+zh:{h:'拍下一株植物',tap:'打开相机或上传照片',cam:'相机',shot:'拍照',upl:'上传照片',busy:'分析中…',lib:'图鉴',search:'搜索植物',garden:'我的花园',rare:'珍稀',profile:'我的',home:'扫描',save:'加入花园',saved:'已加入 ✓',empty:'还没有植物。扫描或从图鉴中选择。',notes:'笔记',add:'添加',nph:'写笔记…',set:'设置',loc:'定位',on:'已开启',off:'已关闭',dark:'深色模式',name:'你的名字',photo:'点按更换头像',ok:'健康',sick:'问题',treat:'治疗',water:'浇水',care:'养护指南',all:'全部',close:'关闭',err:'出错了，请重试。',camoff:'无法使用相机，请使用“上传照片”。',rs:'IUCN 列出的濒危物种，数量持续下降。',wild:'野外约',CR:'极危',EN:'濒危',VU:'易危',v:'蔬菜',f:'水果',fl:'花卉',t:'树木',h:'草本',i:'室内',fd:'大田'}};
+const LN={uz:'Uzbek (Latin script)',ru:'Russian',en:'English',tr:'Turkish',zh:'Simplified Chinese'};
+const CATS={veg:'v',fruit:'f',flower:'fl',tree:'t',herb:'h',indoor:'i',field:'fd'};
+const H={
+uz:{demo:"Demo skaner",dm:["Pomidor", "Kech fitofterioz", "Zararlangan barglarni uzing. Mis xloroksidi eritmasi bilan 7 kunda bir purkang.", "Ildiz ostiga, har 3 kunda 1,5 litr."],h:'Yashil hamrohingizni toping',s:'Oʻsimliklarni kashf eting, parvarish maslahati oling.',my:'Mening oʻsimliklarim',w:['Shu hafta','Keyingi hafta'],tk:[['Sugʻorish','Ildiz ostiga suv quying'],['Yorugʻlikni tekshirish','Yorqin, tarqoq nur'],['Barglarni artish','Changni tozalang'],['Oʻgʻitlash','Suyuq oʻgʻit bering']],d:['Bugun','Ertaga','Juma','Yak'],id:'Oʻsimlik aniqlandi',m:'mos'},
+ru:{demo:"Демо-скан",dm:["Помидор", "Фитофтороз", "Удалите поражённые листья. Опрыскивайте препаратом с медью раз в 7 дней.", "Под корень, 1,5 л каждые 3 дня."],h:'Найдите своего зелёного друга',s:'Открывайте растения и получайте советы по уходу.',my:'Мои растения',w:['Эта неделя','Следующая'],tk:[['Полив','Поливайте под корень'],['Проверить свет','Яркий рассеянный свет'],['Протереть листья','Уберите пыль'],['Подкормка','Жидкое удобрение']],d:['Сегодня','Завтра','Пт','Вс'],id:'Растение определено',m:'совпадение'},
+en:{demo:"Try demo scan",dm:["Tomato", "Late blight", "Remove affected leaves. Spray a copper-based fungicide every 7 days.", "At the roots, 1.5 L every 3 days."],h:'Find your next green companion',s:'Discover plants, get care guidance, keep them thriving.',my:'My plants',w:['This week','Next week'],tk:[['Water','Water at the roots'],['Check light','Bright, indirect light'],['Wipe leaves','Remove dust'],['Feed','Use liquid fertilizer']],d:['Today','Tomorrow','Fri','Sun'],id:'Plant identified',m:'match'},
+tr:{demo:"Demo tara",dm:["Domates", "Geç yanıklık", "Hastalıklı yaprakları koparın. 7 günde bir bakır bazlı ilaç püskürtün.", "Köklere, 3 günde bir 1,5 litre."],h:'Yeşil yol arkadaşını bul',s:'Bitkileri keşfet, bakım önerileri al.',my:'Bitkilerim',w:['Bu hafta','Gelecek hafta'],tk:[['Sula','Köklere su verin'],['Işığı kontrol et','Parlak, dolaylı ışık'],['Yaprakları sil','Tozu temizleyin'],['Gübrele','Sıvı gübre verin']],d:['Bugün','Yarın','Cum','Paz'],id:'Bitki tanındı',m:'eşleşme'},
+zh:{demo:"演示扫描",dm:["番茄", "晚疫病", "摘除病叶，每7天喷一次铜制剂。", "浇在根部，每3天1.5升。"],h:'找到你的绿色伙伴',s:'发现植物，获取养护建议。',my:'我的植物',w:['本周','下周'],tk:[['浇水','浇在根部'],['检查光照','明亮散射光'],['擦拭叶片','清除灰尘'],['施肥','使用液体肥料']],d:['今天','明天','周五','周日'],id:'已识别植物',m:'匹配'}};
+const FB={veg:['Har 2–3 kunda ildiz ostiga sugʻoring. Toʻliq quyosh kerak.','Поливайте каждые 2–3 дня под корень. Нужно полное солнце.','Water every 2–3 days at the roots. Needs full sun.'],
+fruit:['Quruq paytda haftada 1–2 marta chuqur sugʻoring. Quyoshli joy.','В сухую погоду 1–2 раза в неделю глубоко. Солнечное место.','Deep water 1–2 times a week in dry weather. Sunny spot.'],
+flower:['Tuproq qurisa sugʻoring, bargga suv tegizmang. Yorqin nur.','Поливайте, когда подсохнет почва, не мочите листья. Яркий свет.','Water when soil dries; keep leaves dry. Bright light.'],
+tree:['Yosh daraxtni haftada bir, kattasini oyda 1–2 marta sugʻoring.','Молодое дерево раз в неделю, взрослое 1–2 раза в месяц.','Young trees weekly, mature ones 1–2 times a month.'],
+herb:['Tuproq nam turishi kerak. Yorugʻ joy, har 2 kunda sugʻoring.','Почва должна быть влажной. Светлое место, полив раз в 2 дня.','Keep soil lightly moist. Bright spot, water every 2 days.'],
+indoor:['Haftada bir sugʻoring. Tarqoq yorugʻlik, toʻgʻridan-toʻgʻri quyoshsiz.','Раз в неделю. Рассеянный свет, без прямого солнца.','Weekly. Bright indirect light, no direct sun.'],
+field:['Ekin davrida muntazam sugʻoring. Ochiq, quyoshli dala.','Регулярный полив в сезон роста. Открытое солнечное поле.','Regular irrigation in the growing season. Open, sunny field.']};
+const IDX={uz:0,ru:1,en:2,tr:2,zh:2};
+let wk=0,done={},lang='uz',cat='all',garden=[],notes=[],prof={name:'',photo:''},sc=null,stream=null,lastImg=null;
+const t=k=>T[lang][k];
+const nm=p=>p.n[IDX[lang]];
+function load(){try{const d=JSON.parse(localStorage.getItem('bd')||'{}');garden=d.garden||[];notes=d.notes||[];prof=d.prof||prof;lang=d.lang||lang;done=d.done||{}}catch(e){}}
+function store(){try{localStorage.setItem('bd',JSON.stringify({garden,notes,prof,lang,done}))}catch(e){}}
+function go(s){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on',e.id==='s-'+s));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));scrollTo(0,0)}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.s));
+
+function render(){
+document.documentElement.lang=lang;$('lang').value=lang;
+const set=(id,k)=>$(id).textContent=t(k);
+set('t-h','h');set('camTxt','tap');set('camBtn','cam');$('upl').textContent=t('upl');$('demo').textContent=H[lang].demo;$('t-lib').textContent=H[lang].h;$('t-ls').textContent=H[lang].s;$('t-my').textContent=H[lang].my;$('heroSvg').innerHTML=PL[37].s;$('q').placeholder=t('search');set('t-garden','garden');set('t-rare','rare');set('t-notes','notes');set('addNote','add');$('note').placeholder=t('nph');set('t-rareSub','rs');set('t-set','set');set('t-loc','loc');set('t-dark','dark');set('t-photo','photo');$('pname').placeholder=t('name');
+set('n-home','home');set('n-lib','lib');set('n-garden','garden');set('n-rare','rare');set('n-profile','profile');
+$('locTxt').textContent=$('locTog').classList.contains('on')?t('on'):t('off');
+drawLib();drawGarden();drawRare();drawProf();drawTasks();
+}
+function drawTasks(){const h=H[lang];$('seg').innerHTML=h.w.map((x,i)=>`<button class="${i===wk?'on':''}" data-w="${i}">${x}</button>`).join('');$('seg').querySelectorAll('button').forEach(b=>b.onclick=()=>{wk=+b.dataset.w;drawTasks()});$('tasks').innerHTML=h.tk.map((x,i)=>{const k=wk+'-'+i;return `<div class="task ${done[k]?'done':''}" data-k="${k}"><button class="ck">${done[k]?'✓':''}</button><div><b>${x[0]}</b><p class="sub">${x[1]}</p></div><span class="sub">${wk?'':h.d[i]}</span></div>`}).join('');$('tasks').querySelectorAll('.task').forEach(e=>e.onclick=()=>{done[e.dataset.k]=!done[e.dataset.k];store();drawTasks()})}
+function drawLib(){
+const q=$('q').value.toLowerCase();
+$('chips').innerHTML=['all',...Object.keys(CATS)].map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${c}">${c==='all'?t('all'):t(CATS[c])}</button>`).join('');
+$('chips').querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;drawLib()});
+$('grid').innerHTML=PL.filter(p=>(cat==='all'||p.c===cat)&&(!q||(p.n.join(' ')+p.l).toLowerCase().includes(q))).map(p=>`<button class="tile" data-i="${p.i}">${p.s}<h3>${nm(p)}</h3><i class="lat">${p.l}</i></button>`).join('');
+$('grid').querySelectorAll('.tile').forEach(b=>b.onclick=()=>openPlant(PL[b.dataset.i]));
+}
+$('q').oninput=drawLib;
+function drawGarden(){
+$('gl').innerHTML=garden.length?garden.map(g=>`<div class="gi"><div class="th">${g.img?`<img src="${g.img}" alt="">`:g.svg}</div><div><h3>${g.name}</h3><span class="pill ${g.ok?'ok':'bad'}">${g.ok?t('ok'):t('sick')}</span></div></div>`).join(''):`<p class="sub" style="margin-top:14px">${t('empty')}</p>`;
+$('nl').innerHTML=notes.map(n=>`<div class="gi" style="grid-template-columns:1fr">${n}</div>`).join('');
+}
+$('addNote').onclick=()=>{const v=$('note').value.trim();if(!v)return;notes.unshift(v.replace(/</g,'&lt;'));$('note').value='';store();drawGarden()};
+function drawRare(){
+$('rl').innerHTML=RR.map(r=>`<div class="rare">${r.s}<div><h3>${nm(r)}</h3><i class="lat">${r.l}</i><div class="scale"><i class="on"></i><i class="${r.k!=='VU'?'on':''}"></i><i class="${r.k==='CR'?'on':''}"></i></div><p class="sub">${t(r.k)} · IUCN ${r.k}${r.q?' · '+t('wild')+' '+r.q:''}</p></div></div>`).join('');
+}
+function drawProf(){$('ava').innerHTML=prof.photo?`<img src="${prof.photo}" alt="">`:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';$('pname').value=prof.name}
+$('ava').onclick=()=>$('pf').click();
+$('pname').oninput=e=>{prof.name=e.target.value;store()};
+function shrink(file,max){return new Promise(res=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>res({blob:b,url:c.toDataURL('image/jpeg',.8)}),'image/jpeg',.85)};im.src=URL.createObjectURL(file)})}
+$('pf').onchange=async e=>{const f=e.target.files[0];if(!f)return;const r=await shrink(f,240);prof.photo=r.url;store();drawProf()};
+$('lang').onchange=e=>{lang=e.target.value;document.documentElement.dir='ltr';store();render()};
+
+// AI helper
+async function ask(prompt,blob){
+const sample=typeof claude==='undefined'?null:await claude.use('sample');if(!sample)throw new Error('AI is not available in this viewer');
+const r=await sample(prompt,blob?{images:[blob],cache:false}:{cache:false});
+const m=r.text.match(/\{[\s\S]*\}/);if(!m)throw new Error('fmt');return JSON.parse(m[0]);
+}
+const FMT='Reply with ONLY one JSON object, no markdown. Write every text value in '+'LANGNAME'+'.';
+function jp(){return FMT.replace('LANGNAME',LN[lang])}
+
+// Camera
+let live=false;
+$('camBtn').onclick=async()=>{
+if(live){const v=$('cam').querySelector('video');const c=document.createElement('canvas');const k=Math.min(1,900/Math.max(v.videoWidth,v.videoHeight));c.width=v.videoWidth*k;c.height=v.videoHeight*k;c.getContext('2d').drawImage(v,0,0,c.width,c.height);c.toBlob(b=>analyze(b,c.toDataURL('image/jpeg',.6)),'image/jpeg',.85);return}
+try{const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});const v=document.createElement('video');v.srcObject=st;v.autoplay=true;v.playsInline=true;v.muted=true;$('cam').querySelectorAll('video,img').forEach(x=>x.remove());$('cam').prepend(v);$('camTxt').style.display='none';live=true;$('camBtn').textContent=t('shot')}catch(e){$('file').click()}};
+$('demo').onclick=()=>{const d=H[lang].dm,rs=$('res');rs.style.display='block';rs.innerHTML=`<span class="sub" style="color:var(--acc);font-weight:700">✓ ${H[lang].id} · 94% ${H[lang].m}</span><h3 style="font-size:24px;font-weight:800">${d[0]}</h3><i class="lat">Solanum lycopersicum</i><br><span class="pill bad">${t('sick')}</span><p><b style="display:inline;margin:0;color:var(--ink);font-size:15px">${d[1]}</b></p><b>${t('treat')}</b><p>${d[2]}</p><b>${t('water')}</b><p>${d[3]}</p><button class="btn" id="sv" style="margin-top:20px">${t('save')}</button>`;rs.scrollIntoView({behavior:'smooth'});$('sv').onclick=()=>{garden.unshift({name:d[0],ok:false,svg:PL[0].s});store();drawGarden();$('sv').textContent=t('saved')}};
+(function(){const C=['#F26A0F','#FFB27A','#F6C28B','#9BC79A'];let h='';for(let i=0;i<9;i++){const sz=16+Math.random()*16;h+=`<svg class="leaf" style="left:${Math.random()*95}%;width:${sz}px;height:${sz}px;animation-duration:${11+Math.random()*10}s;animation-delay:-${Math.random()*18}s" viewBox="0 0 24 24"><path d="M4 20C4 9 11 4 21 3C20 13 15 20 4 20Z" fill="${C[i%4]}"/><path d="M4 20L14 10" stroke="#fff" stroke-width="1.2" fill="none"/></svg>`}$('leaves').innerHTML=h})();
+$('upl').onclick=()=>$('file2').click();
+const onPick=async e=>{const f=e.target.files[0];if(!f)return;const r=await shrink(f,900);const th=await shrink(f,200);$('cam').querySelectorAll('img').forEach(x=>x.remove());const im=document.createElement('img');im.src=r.url;$('cam').prepend(im);$('camTxt').style.display='none';analyze(r.blob,th.url);e.target.value=''};
+$('file').onchange=onPick;$('file2').onchange=onPick;
+async function analyze(blob,thumb){
+lastImg=thumb;const rs=$('res');rs.style.display='block';rs.innerHTML=`<p class="sub">${t('busy')}</p>`;
+try{
+const d=await ask(`You are an expert agronomist. Identify the plant in this photo and check its health. ${jp()} JSON keys: "plant" (common name), "latin", "match" (integer 0-100, your confidence), "healthy" (boolean), "problem" (disease or pest name, or empty string), "treatment" (short practical advice, specific products or home remedies, empty if healthy), "watering" (how much and how often, with amounts). If there is no plant, set "plant" to "?".`,blob);
+sc={name:d.plant,ok:!!d.healthy,img:thumb};
+rs.innerHTML=`<span class="sub" style="color:var(--acc);font-weight:700">✓ ${H[lang].id}${d.match?' · '+d.match+'% '+H[lang].m:''}</span><h3 style="font-size:24px;font-weight:800">${d.plant}</h3><i class="lat">${d.latin||''}</i><br><span class="pill ${d.healthy?'ok':'bad'}">${d.healthy?t('ok'):t('sick')}</span>${d.problem?`<p><b style="display:inline;margin:0;color:var(--ink);font-size:15px">${d.problem}</b></p>`:''}${d.treatment?`<b>${t('treat')}</b><p>${d.treatment}</p>`:''}<b>${t('water')}</b><p>${d.watering||''}</p><button class="btn" id="sv" style="margin-top:20px">${t('save')}</button>`;
+$('sv').onclick=()=>{garden.unshift({name:sc.name,ok:sc.ok,img:sc.img});store();drawGarden();$('sv').textContent=t('saved')};
+}catch(e){rs.innerHTML=`<p>${t('err')}</p><p class="sub">${(e&&(e.code||e.message))||''}</p>`}
+}
+
+// Plant sheet
+function openPlant(p){
+const m=$('modal');m.style.display='block';
+m.innerHTML=`<button class="x" id="cl">← ${t('close')}</button><div class="big">${p.s}</div><h1 style="font-size:30px">${nm(p)}</h1><i class="lat">${p.l}</i><div style="margin:20px 0" class="pair"><button class="btn" id="ad">${t('save')}</button><button class="btn alt" id="cg">${t('care')}</button></div><div id="cr"></div>`;
+$('cl').onclick=()=>m.style.display='none';
+$('ad').onclick=()=>{garden.unshift({name:nm(p),ok:true,svg:p.s});store();drawGarden();$('ad').textContent=t('saved')};
+$('cg').onclick=async()=>{$('cr').innerHTML=`<p class="sub">${t('busy')}</p>`;
+try{const d=await ask(`Care guide for ${p.l} (${p.n[2]}), for a home gardener in Central Asia. ${jp()} JSON keys: "lt_s" (light, max 3 words), "wt_s" (watering frequency, max 3 words), "lv_s" (care difficulty, max 2 words), "watering", "light", "soil", "diseases" (the 2 most common diseases or pests and how to treat each).`);
+$('cr').innerHTML=`<div class="attrs"><div><span>☀</span>${d.lt_s}</div><div><span>💧</span>${d.wt_s}</div><div><span>🌱</span>${d.lv_s}</div></div><b class="sub">${t('water')}</b><p>${d.watering}</p><p class="sub" style="margin-top:10px">☀ ${d.light}</p><p class="sub">${d.soil}</p><b class="sub" style="display:block;margin-top:14px">${t('sick')}</b><p>${d.diseases}</p>`}catch(e){$('cr').innerHTML=`<p>${FB[p.c][IDX[lang]]}</p><p class="sub">AI: ${(e&&(e.code||e.message))||''}</p>`}};
+}
+
+// Settings
+$('locTog').onclick=()=>{const g=$('locTog');g.classList.toggle('on');$('locTxt').textContent=g.classList.contains('on')?t('on'):t('off');if(g.classList.contains('on')){try{navigator.geolocation.getCurrentPosition(p=>{$('locTxt').textContent=t('on')+' · '+p.coords.latitude.toFixed(2)+', '+p.coords.longitude.toFixed(2)},()=>{},{timeout:5000})}catch(e){}}};
+$('darkTog').onclick=()=>{const g=$('darkTog');g.classList.toggle('on');document.documentElement.setAttribute('data-theme',g.classList.contains('on')?'dark':'light')};
+load();render();
+</script>
+</body>
+</html>
